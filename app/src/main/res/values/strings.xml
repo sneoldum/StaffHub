@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">StaffHub</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="item_panel">Item Panel</string>
+    <string name="add">Add</string>
+    <string name="item_name">Item Name</string>
+    <string name="quantity">Quantity</string>
+    <string name="add_item">Add Item</string>
+    <string name="view_items">View Items</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="login_button_text">Login</string>
+    <string name="register_button_text">Register</string>
+    <string name="logo_description">Logo</string>
+</resources>
