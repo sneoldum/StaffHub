@@ -40,4 +40,9 @@ public class ItemViewModel extends AndroidViewModel {
     public LiveData<Item> getItemByName(String name) {
         return repository.getItemByName(name);
     }
+
+    public Item getItemByNameSync(String name) {
+        return repository.getItemByNameSync(name);
+    }
+
 }

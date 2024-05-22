@@ -1,6 +1,7 @@
 package com.emplomanage.staffhub;
 
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,20 +62,31 @@ public class MainActivity extends AppCompatActivity implements ItemAdapter.OnIte
         dialogBuilder.setPositiveButton("Add", (dialog, which) -> {
             String itemName = itemNameEditText.getText().toString().trim();
             int itemQuantity = Integer.parseInt(itemQuantityEditText.getText().toString().trim());
-            itemViewModel.getItemByName(itemName).observe(this, existingItem -> {
-                if (existingItem != null) {
-                    existingItem.setQuantity(existingItem.getQuantity() + itemQuantity);
-                    itemViewModel.update(existingItem);
-                } else {
-                    Item newItem = new Item(itemName, itemQuantity);
-                    itemViewModel.insert(newItem);
+
+            // Asynchronous task to avoid infinite loop
+            new AsyncTask<Void, Void, Item>() {
+                @Override
+                protected Item doInBackground(Void... voids) {
+                    return itemViewModel.getItemByNameSync(itemName);
                 }
-            });
+
+                @Override
+                protected void onPostExecute(Item existingItem) {
+                    if (existingItem != null) {
+                        existingItem.setQuantity(existingItem.getQuantity() + itemQuantity);
+                        itemViewModel.update(existingItem);
+                    } else {
+                        Item newItem = new Item(itemName, itemQuantity);
+                        itemViewModel.insert(newItem);
+                    }
+                }
+            }.execute();
         });
         dialogBuilder.setNegativeButton("Cancel", null);
 
         dialogBuilder.create().show();
     }
+
 
 
     private void showUpdateDeleteDialog(Item item) {

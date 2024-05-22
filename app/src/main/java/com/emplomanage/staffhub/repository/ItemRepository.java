@@ -37,6 +37,10 @@ public class ItemRepository {
         new DeleteItemAsyncTask(itemDao).execute(item);
     }
 
+    public Item getItemByNameSync(String name) {
+        return itemDao.getItemByNameSync(name);
+    }
+
     public LiveData<Item> getItemByName(String name) {
         return itemDao.getItemByName(name);
     }

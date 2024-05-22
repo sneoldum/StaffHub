@@ -76,10 +76,6 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        if(userViewModel.getUserByUsername(username) != null){
-            usernameEditText.setError("User already exists!");
-            return;
-        }
 
         User user = new User(username, password);
         userViewModel.insertUser(user);

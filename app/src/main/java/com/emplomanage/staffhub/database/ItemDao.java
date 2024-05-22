@@ -28,4 +28,8 @@ public interface ItemDao {
 
     @Query("SELECT * FROM items ORDER BY name ASC")
     LiveData<List<Item>> getAllItems();
+
+
+    @Query("SELECT * FROM items WHERE name = :name LIMIT 1")
+    Item getItemByNameSync(String name);
 }
